@@ -25,6 +25,7 @@ import ru.ikbo2019.bookinghotel.security.entities.RoleName;
 import ru.ikbo2019.bookinghotel.security.entities.User;
 import ru.ikbo2019.bookinghotel.security.jwt.JwtTokenProvider;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -75,7 +76,10 @@ public class SecurityController {
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
             .orElseThrow(() -> new BusinessException("Default User Role not found in DB."));
 
-        user.setRoles(Set.of(userRole));
+        Set<Role> roles = new HashSet<>();
+        roles.add(userRole);
+
+        user.setRoles(roles);
 
         userRepository.save(user);
 
