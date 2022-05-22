@@ -24,14 +24,14 @@ public class RoomController {
 
     public List<Room> getAllRoomsWithCityNameAndDates(@RequestBody RoomDto roomDto) {
         log.info("[Getting rooms request] -> {}", roomDto);
-        var response = roomService.getAllRoomsByStartDateAndEndDateAndCityName(roomDto);
+        List<Room> response = roomService.getAllRoomsByStartDateAndEndDateAndCityName(roomDto);
         log.info("[Getting rooms response] <- {}", response);
         return response;
     }
 
     @GetMapping("/getNumberOfRoomsWithTypes")
     public List<Map<RoomType, Long>> getNumberOfRoomsWithRoomTypes() {
-        var response = roomService.getNumberOfRoomsWithRoomTypes();
+        List<Map<RoomType, Long>> response = roomService.getNumberOfRoomsWithRoomTypes();
         log.info("[Getting number of rooms with types response] <- {}", response);
         return response;
     }

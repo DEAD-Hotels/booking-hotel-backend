@@ -35,7 +35,7 @@ public class HotelController {
     @GetMapping("/{id}")
     public Hotel getHotelById(@PathVariable("id") Integer id) {
         log.info("[get hotel by ID] -> {}", id);
-        var response = hotelService.getById(id);
+        Hotel response = hotelService.getById(id);
         log.info("[get hotel by ID] <- {}", response);
         return response;
     }
@@ -43,7 +43,7 @@ public class HotelController {
     @GetMapping("/countByCity")
     public List<HotelDto> getAllCountHotelsInCities() {
         log.info("[get all count hotels in cities] ->");
-        var response = hotelService.getAllCountHotelsInCities();
+        List<HotelDto> response = hotelService.getAllCountHotelsInCities();
         log.info("[get hotels info response] <- {}", response);
         return response;
     }

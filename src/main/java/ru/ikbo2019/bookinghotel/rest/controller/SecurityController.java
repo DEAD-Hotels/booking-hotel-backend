@@ -52,7 +52,7 @@ public class SecurityController {
 
     @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) {
-        var username = signUpRequest.getUsername();
+        String username = signUpRequest.getUsername();
         if (userRepository.existsByUsername(username)) {
             return new ResponseEntity<>(
                 new ApiResponse(false, "Username is already taken!"), HttpStatus.BAD_REQUEST);
