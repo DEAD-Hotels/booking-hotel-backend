@@ -5,41 +5,41 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import ru.ikbo2019.bookinghotel.entity.enums.BookingStatus;
+import ru.ikbo2019.bookinghotel.security.entities.User;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
-/**
- * todo Document type Booking
- */
 @Entity
 @Table(name = "bookings")
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Booking extends BaseEntity{
+public class Reservation extends BaseEntity {
 
-    /**
-     * TODO добавить USER
-     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate start;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate end;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @ManyToMany
+    @JoinTable(
+        name= "reservation_rooms",
+        joinColumns = @JoinColumn(name= "reservation_id"),
+        inverseJoinColumns = @JoinColumn(name="room_id"))
+    private List<Room> reservationRooms;
+
+    private BigDecimal totalPrice;
 
     @Enumerated(EnumType.STRING)
     private BookingStatus status;
-
 }

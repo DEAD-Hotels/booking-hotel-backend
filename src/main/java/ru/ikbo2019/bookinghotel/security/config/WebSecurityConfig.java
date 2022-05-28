@@ -71,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .antMatchers(HttpMethod.GET, "/hotels/**","/rooms/**" )
                     .permitAll()
+                .antMatchers(HttpMethod.POST, "/reservation/**")
+                    .permitAll()
                 .anyRequest()
                     .authenticated();
             //@formatter:on
