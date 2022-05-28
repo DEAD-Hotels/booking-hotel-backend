@@ -3,6 +3,7 @@ package ru.ikbo2019.bookinghotel.service.hotel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.ikbo2019.bookinghotel.entity.Hotel;
+import ru.ikbo2019.bookinghotel.entity.Room;
 import ru.ikbo2019.bookinghotel.exception.BusinessException;
 import ru.ikbo2019.bookinghotel.repository.HotelRepository;
 import ru.ikbo2019.bookinghotel.rest.dto.HotelDto;
@@ -38,5 +39,10 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<Hotel> getHotelsByRoomPriceBetween(String cityName, Long minPrice, Long maxPrice) {
         return repository.findByCityNameAndChipestPriceBetween(cityName, BigDecimal.valueOf(minPrice), BigDecimal.valueOf(maxPrice));
+    }
+
+    @Override
+    public List<Room> getRoomsByHotelId(Integer hotelId) {
+        return repository.getRoomsByHotelId(hotelId);
     }
 }

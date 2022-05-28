@@ -8,9 +8,6 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * todo Document type City
- */
 @Entity
 @Table(name = "cities")
 @Getter

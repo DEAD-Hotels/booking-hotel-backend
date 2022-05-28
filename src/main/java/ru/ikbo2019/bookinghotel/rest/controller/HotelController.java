@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.ikbo2019.bookinghotel.entity.Hotel;
+import ru.ikbo2019.bookinghotel.entity.Room;
+import ru.ikbo2019.bookinghotel.repository.HotelRepository;
 import ru.ikbo2019.bookinghotel.rest.dto.HotelDto;
 import ru.ikbo2019.bookinghotel.service.hotel.HotelService;
 
@@ -16,7 +18,6 @@ import java.util.List;
 @CrossOrigin("*")
 public class HotelController {
     private final HotelService hotelService;
-
     @GetMapping()
     public List<Hotel> getHotelsByCityName(@RequestParam("city") String destination,
         @RequestParam(value = "min", required = false) Long minPrice,
@@ -46,6 +47,11 @@ public class HotelController {
         List<HotelDto> response = hotelService.getAllCountHotelsInCities();
         log.info("[get hotels info response] <- {}", response);
         return response;
+    }
+
+    @GetMapping("/{hotelId}/rooms")
+    public List<Room> getRooms(@PathVariable("hotelId") Integer hotelId) {
+        return hotelService.getRoomsByHotelId(hotelId);
     }
 
 /*    @GetMapping("/findHotelsByPriceBetween")

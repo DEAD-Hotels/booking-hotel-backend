@@ -1,6 +1,7 @@
 package ru.ikbo2019.bookinghotel.service.hotel;
 
 import ru.ikbo2019.bookinghotel.entity.Hotel;
+import ru.ikbo2019.bookinghotel.entity.Room;
 import ru.ikbo2019.bookinghotel.rest.dto.HotelDto;
 
 import java.util.List;
@@ -35,4 +36,11 @@ public interface HotelService {
      * @return список отелей
      */
     List<Hotel> getHotelsByRoomPriceBetween(String cityName, Long minPrice, Long maxPrice);
+
+    /**
+     * Получить список номеров в конкретном отеле по его ID
+     * @param hotelId - уникальный идентификатор отеля
+     * @return список номеров в отеле
+     */
+    List<Room> getRoomsByHotelId(Integer hotelId);
 }

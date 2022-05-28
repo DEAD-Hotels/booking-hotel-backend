@@ -22,4 +22,10 @@ public interface RoomService {
      * @return название и количество типов номеров
      */
     List<Map<RoomType, Long>> getNumberOfRoomsWithRoomTypes();
+
+    /**
+     * Обновить статус номеров
+     * @param rooms - cписок номеров
+     */
+    void updateRoomsStatus(List<Room> rooms);
 }

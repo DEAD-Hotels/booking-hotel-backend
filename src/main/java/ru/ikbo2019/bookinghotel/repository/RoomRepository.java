@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.ikbo2019.bookinghotel.entity.Room;
 import ru.ikbo2019.bookinghotel.entity.enums.RoomType;
+import ru.ikbo2019.bookinghotel.rest.dto.RoomDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,4 +25,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     @Query(value = "SELECT r.roomType as roomType, COUNT(r) as numberOfRooms FROM Room r GROUP BY r.roomType")
     List<Map<RoomType, Long>> findNumberOfRoomsWithRoomTypes();
+
+    @Query(value= "SELECT r FROM Room r JOIN FETCH r.hotel h where h.id = :hotelId")
+    List<Room> findAllByHotel_Id(Integer hotelId);
 }
